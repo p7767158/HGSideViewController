@@ -58,7 +58,20 @@
     if (!self.panEnabled) {
         return;
     }
+    CGPoint locate = [pan locationInView:self.rootViewController.view];
+    if (locate.x > UIScreen.mainScreen.bounds.size.width * kEdgeRate) {
+        if (self.rootViewController.view.frame.origin.x > UIScreen.mainScreen.bounds.size.width * 0.4) {
+            [self sideToRight];
+        } else {
+            [self sideToLeft];
+        }
+        return;
+    }
     CGPoint p = [pan translationInView:self.view];
+    CGPoint velocity = [pan velocityInView:self.view];
+    
+//    NSLog(@"p.x:%f",p.x);
+//    NSLog(@"p.y:%f",p.y);
     
     CGFloat newRootCenterX;
     CGFloat newLeftCenterX;
@@ -72,12 +85,16 @@
     
     self.rootViewController.view.center = CGPointMake(newRootCenterX, self.rootViewController.view.center.y);
     self.leftViewController.view.center = CGPointMake(newLeftCenterX, self.leftViewController.view.center.y);
-    NSLog(@"%@", NSStringFromCGPoint(self.leftViewController.view.center));
+//    NSLog(@"%@", NSStringFromCGPoint(self.leftViewController.view.center));
     
     [pan setTranslation:CGPointMake(0, 0) inView:self.view];
     
     if (pan.state == UIGestureRecognizerStateEnded) {
-        if (self.rootViewController.view.frame.origin.x > UIScreen.mainScreen.bounds.size.width * 0.4) {
+        if (velocity.x > 800) {
+            [self sideToRight];
+        } else if (velocity.x < -800) {
+            [self sideToLeft];
+        } else if (self.rootViewController.view.frame.origin.x > UIScreen.mainScreen.bounds.size.width * 0.4) {
             [self sideToRight];
         } else {
             [self sideToLeft];
