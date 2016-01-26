@@ -16,7 +16,6 @@
 
 @implementation AppDelegate
 
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     self.window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
@@ -27,7 +26,7 @@
     self.sideViewController = [[HHSideViewController alloc] initWithLeftViewController:[[ViewController alloc] init] rootViewController:self.mainNavController];
     self.window.rootViewController = self.sideViewController;
     [self.window makeKeyAndVisible];
-    return YES;
+    return self;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

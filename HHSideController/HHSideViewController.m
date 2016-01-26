@@ -10,8 +10,6 @@
 
 @interface HHSideViewController ()<UIGestureRecognizerDelegate>
 @property (nonatomic, strong) UIPanGestureRecognizer *pan;
-@property (nonatomic, strong) UISwipeGestureRecognizer *rightSwipe;
-@property (nonatomic, strong) UISwipeGestureRecognizer *leftSwipe;
 @end
 
 @implementation HHSideViewController
@@ -59,19 +57,13 @@
         return;
     }
     CGPoint locate = [pan locationInView:self.rootViewController.view];
-    if (locate.x > UIScreen.mainScreen.bounds.size.width * kEdgeRate) {
-        if (self.rootViewController.view.frame.origin.x > UIScreen.mainScreen.bounds.size.width * 0.4) {
-            [self sideToRight];
-        } else {
-            [self sideToLeft];
-        }
-        return;
-    }
     CGPoint p = [pan translationInView:self.view];
     CGPoint velocity = [pan velocityInView:self.view];
     
-//    NSLog(@"p.x:%f",p.x);
-//    NSLog(@"p.y:%f",p.y);
+    if (locate.x > UIScreen.mainScreen.bounds.size.width * kEdgeRate) {
+        [self judgeVelocity:velocity];
+        return;
+    }
     
     CGFloat newRootCenterX;
     CGFloat newLeftCenterX;
@@ -85,20 +77,11 @@
     
     self.rootViewController.view.center = CGPointMake(newRootCenterX, self.rootViewController.view.center.y);
     self.leftViewController.view.center = CGPointMake(newLeftCenterX, self.leftViewController.view.center.y);
-//    NSLog(@"%@", NSStringFromCGPoint(self.leftViewController.view.center));
     
     [pan setTranslation:CGPointMake(0, 0) inView:self.view];
     
     if (pan.state == UIGestureRecognizerStateEnded) {
-        if (velocity.x > 800) {
-            [self sideToRight];
-        } else if (velocity.x < -800) {
-            [self sideToLeft];
-        } else if (self.rootViewController.view.frame.origin.x > UIScreen.mainScreen.bounds.size.width * 0.4) {
-            [self sideToRight];
-        } else {
-            [self sideToLeft];
-        }
+        [self judgeVelocity:velocity];
     }
 }
 
@@ -114,6 +97,19 @@
         self.rootViewController.view.center = CGPointMake(UIScreen.mainScreen.bounds.size.width / 2, self.rootViewController.view.center.y);
         self.leftViewController.view.center = CGPointMake((0.5 - kEdgeRate * 2) * UIScreen.mainScreen.bounds.size.width, self.rootViewController.view.center.y);
     }];
+}
+
+- (void)judgeVelocity:(CGPoint)velocity
+{
+    if (velocity.x > 500) {
+        [self sideToRight];
+    } else if (velocity.x < -500) {
+        [self sideToLeft];
+    } else if (self.rootViewController.view.frame.origin.x > UIScreen.mainScreen.bounds.size.width * 0.4) {
+        [self sideToRight];
+    } else {
+        [self sideToLeft];
+    }
 }
 
 #pragma mark - UIGestureRecognizerDelegate

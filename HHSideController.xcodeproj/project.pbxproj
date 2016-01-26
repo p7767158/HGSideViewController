@@ -112,6 +112,7 @@
 		E55BA3A31C488DE40032A111 /* HHSideController */ = {
 			isa = PBXGroup;
 			children = (
+				E55BA3E21C48F0A50032A111 /* HHSideController */,
 				E55BA3DD1C48CC810032A111 /* 1.jpg */,
 				E55BA3A71C488DE40032A111 /* AppDelegate.h */,
 				E55BA3A81C488DE40032A111 /* AppDelegate.m */,
@@ -122,8 +123,6 @@
 				E55BA3B21C488DE40032A111 /* LaunchScreen.storyboard */,
 				E55BA3B51C488DE40032A111 /* Info.plist */,
 				E55BA3A41C488DE40032A111 /* Supporting Files */,
-				E55BA3D71C4890E30032A111 /* HHSideViewController.h */,
-				E55BA3D81C4890E30032A111 /* HHSideViewController.m */,
 				E55BA3DA1C489CC60032A111 /* HGViewController.h */,
 				E55BA3DB1C489CC60032A111 /* HGViewController.m */,
 				E55BA3DF1C48D6430032A111 /* otherViewController.h */,
@@ -156,6 +155,15 @@
 				E55BA3CB1C488DE40032A111 /* Info.plist */,
 			);
 			path = HHSideControllerUITests;
+			sourceTree = "<group>";
+		};
+		E55BA3E21C48F0A50032A111 /* HHSideController */ = {
+			isa = PBXGroup;
+			children = (
+				E55BA3D71C4890E30032A111 /* HHSideViewController.h */,
+				E55BA3D81C4890E30032A111 /* HHSideViewController.m */,
+			);
+			name = HHSideController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -520,6 +528,7 @@
 				E55BA3D01C488DE40032A111 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E55BA3D11C488DE40032A111 /* Build configuration list for PBXNativeTarget "HHSideControllerTests" */ = {
 			isa = XCConfigurationList;
@@ -528,6 +537,7 @@
 				E55BA3D31C488DE40032A111 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E55BA3D41C488DE40032A111 /* Build configuration list for PBXNativeTarget "HHSideControllerUITests" */ = {
 			isa = XCConfigurationList;
@@ -536,6 +546,7 @@
 				E55BA3D61C488DE40032A111 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
